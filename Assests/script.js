@@ -153,7 +153,7 @@ window.addEventListener('load', function () {
           var imgEl = document.createElement('img');
           imgEl.setAttribute(
             'src',
-            `http://openweathermap.org/img/w/${data.weather[0].icon}.png`
+            `https://openweathermap.org/img/w/${data.weather[0].icon}.png`
           );
   
           // Append all the content that we created
