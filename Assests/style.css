@@ -2,3 +2,46 @@ h1 {
     background-color: darkorange;
     color: white;
 }
+h1:hover {
+color: mediumblue
+}
+
+.container-fluid {
+    background-color: white(155, 204, 107);
+    
+}
+
+div.card-body {
+    background-color:#98DDCA;
+}
+div.card-body.p-2 {
+    background-color: mediumblue;
+}
+
+.list-group-item {
+    background-color:#98DDCA;
+    font-size: x-large;
+    font-weight:inherit;
+    color:#29211F;
+
+}
+.list-group-item:nth-child(even) {
+    background-color: white;
+    
+}
+.list-group-item:hover {
+    background-color:#D5ECC2;
+}
+h5 {
+    color:blue;
+}
+h5.mt-1:hover {
+    color:#7B113A;
+}
+h5.card-title {
+    color: yellow
+}
+#search-button:hover {
+    background-color: darkorange;
+    
+}
