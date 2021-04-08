@@ -4,3 +4,9 @@ I linked my file with a preexisted framework in bootstrap for design, style and 
 However, I override the style with a CSS file to improve accesibility.
 The data was fetched and parsed with a js file.
 the API used was openweathermap.org
+
+Here is the link for my deployed page at Github.
+https://ramflorez.github.io/Weather_Dashboard/
+
+And here is a link to the screenshots of the deployed page.
+https://github.com/ramflorez/Weather_Dashboard/issues/1#issue-853979022
