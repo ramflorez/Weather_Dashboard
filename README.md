@@ -12,4 +12,4 @@ And here is a link to the screenshots of the deployed page.
 https://github.com/ramflorez/Weather_Dashboard/issues/1#issue-853979022
 
 please see snapshots below.
-<img src="./Assets/Images/After_click.png>
+<img src="Images/After_click.png">
