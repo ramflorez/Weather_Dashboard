@@ -8,8 +8,6 @@ the API used was openweathermap.org
 Here is the link for my deployed page at Github.
 https://ramflorez.github.io/Weather_Dashboard/
 
-And here is a link to the screenshots of the deployed page.
-https://github.com/ramflorez/Weather_Dashboard/issues/1#issue-853979022
-
-please see snapshots below.
-<img src="Images/After_click.png">
+please see snapshots of the deployed pages below.
+<img src="./Assests/Images/After_click.png">
+<img src="./Assests/Images/Before_click.png">
