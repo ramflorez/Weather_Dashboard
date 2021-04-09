@@ -45,9 +45,7 @@ window.addEventListener('load', function () {
               bodyEl.classList.add('card-body', 'p-2');
               var titleEl = document.createElement('h5');
               titleEl.classList.add('card-title');
-              titleEl.textContent = new Date(
-                data.list[i].dt_txt
-              ).toLocaleDateString();
+              titleEl.textContent = new Date()               
               var imgEl = document.createElement('img');
               imgEl.setAttribute(
                 'src',
