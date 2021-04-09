@@ -45,7 +45,9 @@ window.addEventListener('load', function () {
               bodyEl.classList.add('card-body', 'p-2');
               var titleEl = document.createElement('h5');
               titleEl.classList.add('card-title');
-              titleEl.textContent = new Date()               
+              titleEl.textContent = new Date(
+                data.list[i].dt_txt
+              ).toLocaleDateString();               
               var imgEl = document.createElement('img');
               imgEl.setAttribute(
                 'src',
@@ -135,7 +137,8 @@ window.addEventListener('load', function () {
           titleEl.classList.add('card-title');
           titleEl.textContent = `${
             data.name
-          } (${new Date().toLocaleDateString()})`;
+          } 
+          (${new Date().toLocaleDateString()})`;
           var cardEl = document.createElement('div');
           cardEl.classList.add('card');
           var windEl = document.createElement('p');
