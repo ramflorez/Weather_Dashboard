@@ -45,3 +45,11 @@ h5.card-title {
     background-color: darkorange;
     
 }
+#clearList {
+    color:antiquewhite;
+    background-color:#0000CD ;
+}
+#clearList:hover {
+    background-color:#dc3545;
+    
+}

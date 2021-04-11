@@ -45,14 +45,9 @@ window.addEventListener('load', function () {
               bodyEl.classList.add('card-body', 'p-2');
               var titleEl = document.createElement('h5');
               titleEl.classList.add('card-title');
-              titleEl.textContent = new Date(
-                data.list[i].dt_txt
-              ).toLocaleDateString();               
+              titleEl.textContent = new Date(data.list[i].dt_txt).toLocaleDateString();               
               var imgEl = document.createElement('img');
-              imgEl.setAttribute(
-                'src',
-                `https://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png`
-              );
+              imgEl.setAttribute('src',`https://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png`);
               var p1El = document.createElement('p');
               p1El.classList.add('card-text');
               p1El.textContent = `Temp: ${data.list[i].main.temp_max} °F`;
@@ -210,4 +205,10 @@ window.addEventListener('load', function () {
       .querySelector('#search-button')
       .addEventListener('click', getSearchVal);
   });
-  
+
+  //Clear history button
+  $("#clearList").click(function(event) {
+    event.preventDefault();
+    $("#history").empty();
+    localStorage.clear(); 
+  }) 
