@@ -5,7 +5,7 @@ However, I override the style with a CSS file to improve accesibility.
 The data was fetched and parsed with a js file.
 the API used was openweathermap.org.
 User enter a city, clicks the "search" button and receives the weather informaition including uv index.
-List of search is kept in local storage. It can be deleted using the "clear history" button.
+List of search is kept in local storage. It can be deleted using the "clear List" button.
 
 Here is the link for my deployed page at Github.
 https://ramflorez.github.io/Weather_Dashboard/
