@@ -14,8 +14,8 @@ window.addEventListener('load', function () {
       if (!searchValue) {
         return;
       }
-      var endpoint = `https://api.openweathermap.org/data/2.5/forecast?q=${searchValue}&appid=d91f911bcf2c0f925fb6535547a5ddc9&units=imperial`;
-      fetch(endpoint)
+      var forecast = `https://api.openweathermap.org/data/2.5/forecast?q=${searchValue}&appid=d91f911bcf2c0f925fb6535547a5ddc9&units=imperial`;
+      fetch(forecast)
         .then((res) => res.json())
         .then((data) => {
           // Select our forecast element and add a header to it
