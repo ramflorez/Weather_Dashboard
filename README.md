@@ -4,7 +4,7 @@ I linked this DOM file with a preexisted framework in bootstrap for design, styl
 However, I overrode the style with a CSS file to improve accesibility.
 The data was fetched and parsed with a js file.
 The APIs used were from openweathermap.org. An individual key was obtained. This individual key was used to call three different APIs: Current Weather API, Forecast API, and UV API. 
-Cards, and elements like windspeed, humidity, uv index, etc for forecast, current weather and UV were created dinamically in js and were appended to the DOM.
+Cards and elements like windspeed, humidity, uv index, etc for forecast, current weather and UV were created dinamically in js and were appended to the DOM.
 User enters a city, clicks the "search" button and receives the weather information including uv indexes and a 5 days forecast. I used conditionals to change the color of the uv button according to uv indexes from green into orange and red.
 The list of searched cities is kept in local storage. It can be deleted using the "Clear List" button.
 
