@@ -1,36 +1,37 @@
 window.addEventListener('load', function () {
-    // Grab the existing history from local storage IF it exists
-    var existingHistory;
-    if (!JSON.parse(localStorage.getItem('history'))) {
-      existingHistory = [];
+    // call saved history from local storage 
+     let savedHistory;
+    if (!JSON.parse(localStorage.getItem(`history`))) {
+      savedHistory = [];
     } else {
-      existingHistory = JSON.parse(localStorage.getItem('history'));
+      savedHistory = JSON.parse(localStorage.getItem(`history`));
     }
   
-    var historyItems = [];
+    let historyItems = [];
   
-    // Function to get the forecast, loop through only the days of the week and render data to the page
-    function getForecast(searchValue) {
-      if (!searchValue) {
+    // Function to get forecast, and return data to the page.
+    function getForecast(city) {
+      if (!city) {
         return;
       }
-      var forecast = `https://api.openweathermap.org/data/2.5/forecast?q=${searchValue}&appid=d91f911bcf2c0f925fb6535547a5ddc9&units=imperial`;
+      var forecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=91a02f731d160ea776c47556170a3960&units=imperial`;
       fetch(forecast)
         .then((res) => res.json())
         .then((data) => {
-          // Select our forecast element and add a header to it
+          console.log(data)
+          // Select  forecast element and add a title.
           var forecastEl = document.querySelector('#forecast');
           forecastEl.innerHTML = '<h4 class="mt-3">5-Day Forecast:</h4>';
   
-          // Create a div and give it a class of row
+          // Create a div and a class of row.
           forecastRowEl = document.createElement('div');
           forecastRowEl.className = '"row"';
   
-          // Loop over all forecasts (by 3-hour increments)
+          // Loop over all forecasts.
           for (var i = 0; i < data.list.length; i++) {
-            // Only look at forecasts around 3:00pm
-            if (data.list[i].dt_txt.indexOf('15:00:00') !== -1) {
-              // Create HTML elements for a bootstrap card
+            // Render forecasts around 9:00am
+            if (data.list[i].dt_txt.indexOf('9:00:00') !== -1) {
+              // Create HTML elements in the bootstrap card.
               var colEl = document.createElement('div');
               colEl.classList.add('col-md-2');
               var cardEl = document.createElement('div');
@@ -45,7 +46,7 @@ window.addEventListener('load', function () {
               bodyEl.classList.add('card-body', 'p-2');
               var titleEl = document.createElement('h5');
               titleEl.classList.add('card-title');
-              titleEl.textContent = new Date(data.list[i].dt_txt).toLocaleDateString();               
+              titleEl.textContent = new Date(data.list[i].dt_txt).toDateString();               
               var imgEl = document.createElement('img');
               imgEl.setAttribute('src',`https://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png`);
               var p1El = document.createElement('p');
@@ -55,7 +56,7 @@ window.addEventListener('load', function () {
               p2El.classList.add('card-text');
               p2El.textContent = `Humidity: ${data.list[i].main.humidity}%`;
   
-              // Merge together and put on page
+              // Add created elements to the page.
               colEl.appendChild(cardEl);
               bodyEl.appendChild(titleEl);
               bodyEl.appendChild(imgEl);
@@ -70,13 +71,14 @@ window.addEventListener('load', function () {
         });
     }
   
-    // Helper function to fetch and display the UV index
+    // fetch and display the UV index
     function getUVIndex(lat, lon) {
       fetch(
-        `https://api.openweathermap.org/data/2.5/uvi?appid=d91f911bcf2c0f925fb6535547a5ddc9&lat=${lat}&lon=${lon}`
+        `https://api.openweathermap.org/data/2.5/uvi?appid=91a02f731d160ea776c47556170a3960&lat=${lat}&lon=${lon}`
       )
         .then((res) => res.json())
         .then((data) => {
+          console.log(data)
           var bodyEl = document.querySelector('.card-body');
           var uvEl = document.createElement('p');
           uvEl.id = 'uv';
@@ -84,16 +86,16 @@ window.addEventListener('load', function () {
           var buttonEl = document.createElement('span');
           buttonEl.classList.add('btn', 'btn-sm');
           buttonEl.innerHTML = data.value;
-  
-          switch (data.value) {
-            case data.value < 3:
-              buttonEl.classList.add('btn-success');
-              break;
-            case data.value < 7:
-              buttonEl.classList.add('btn-warning');
-              break;
-            default:
-              buttonEl.classList.add('btn-danger');
+
+      // Set different button colors according to uv indexes
+          if (data.value <= 3) {
+            buttonEl.classList.add('btn-success');
+          }
+          else if (data.value > 3 && data.value <= 7) {
+            buttonEl.classList.add('btn-warning');
+          }
+          else {
+            buttonEl.classList.add('btn-danger');
           }
   
           bodyEl.appendChild(uvEl);
@@ -101,29 +103,30 @@ window.addEventListener('load', function () {
         });
     }
   
-    const handleHistory = (term) => {
-      if (existingHistory && existingHistory.length > 0) {
+    let handleHistory = (term) => {
+      if (savedHistory && savedHistory.length > 0) {
         var existingEntries = JSON.parse(localStorage.getItem('history'));
-        var newHistory = [...existingEntries, term];
+        var newHistory = [existingEntries, term];
         localStorage.setItem('history', JSON.stringify(newHistory));
-        // If there is no history, create one with the searchValue and save it localStorage
+        //  Save new history it localStorage
       } else {
         historyItems.push(term);
         localStorage.setItem('history', JSON.stringify(historyItems));
       }
     };
   
-    // Function that preforms the actual API request and creates elements to render to the page
-    function searchWeather(searchValue) {
-      var endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&appid=d91f911bcf2c0f925fb6535547a5ddc9&units=imperial`;
-      fetch(endpoint)
+    //Function to get current weather, and return data to the page
+    function searchWeather(city) {
+      var weather = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=91a02f731d160ea776c47556170a3960&units=imperial`;
+      fetch(weather)
         .then((res) => res.json())
         .then((data) => {
-          // Invoke our history method
-          if (!existingHistory.includes(searchValue)) {
-            handleHistory(searchValue);
+          console.log(data)
+          // Call history method
+          if (!savedHistory.includes(city)) {
+            handleHistory(city);
           }
-          // Clear any old content
+          // Clear old content
           todayEl = document.querySelector('#today');
           todayEl.textContent = ' ';
   
@@ -150,9 +153,9 @@ window.addEventListener('load', function () {
           imgEl.setAttribute(
             'src',
             `https://openweathermap.org/img/w/${data.weather[0].icon}.png`
-          );
-  
-          // Append all the content that we created
+              );
+              console.log(data.weather[0].icon)
+          // Append all content created
           titleEl.appendChild(imgEl);
           cardBodyEl.appendChild(titleEl);
           cardBodyEl.appendChild(tempEl);
@@ -161,13 +164,13 @@ window.addEventListener('load', function () {
           cardEl.appendChild(cardBodyEl);
           todayEl.appendChild(cardEl);
   
-          // Invoke our forecast and UV functions
-          getForecast(searchValue);
+          // Call forecast & UV functions
+          getForecast(city);
           getUVIndex(data.coord.lat, data.coord.lon);
         });
     }
   
-    // Helper function to create a new row
+    //  function to create a new row
     function makeRow(searchValue) {
       // Create a new `li` element and add classes/text to it
       var liEl = document.createElement('li');
@@ -185,12 +188,12 @@ window.addEventListener('load', function () {
       document.getElementById('history').appendChild(liEl);
     }
   
-    // Render existing history to the page.
-    if (existingHistory && existingHistory.length > 0) {
-      existingHistory.forEach((item) => makeRow(item));
+    // Render saved history to the page.
+    if (savedHistory && savedHistory.length > 0) {
+      savedHistory.forEach((item) => makeRow(item));
     }
   
-    // Helper function to get a search value.
+    // function to get a search value.
     function getSearchVal() {
       var searchValue = document.querySelector('#search-value').value;
       if (searchValue) {
@@ -200,13 +203,13 @@ window.addEventListener('load', function () {
       }
     }
   
-    // Attach our getSearchVal function to the search button
+    // Attach  getSearchVal function to the search button
     document
       .querySelector('#search-button')
       .addEventListener('click', getSearchVal);
   });
 
-  //Clear history button
+  //create and enable Clear List button
   $("#clearList").click(function(event) {
     event.preventDefault();
     $("#history").empty();
