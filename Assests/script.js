@@ -23,13 +23,13 @@ window.addEventListener('load', function () {
           var forecastEl = document.querySelector('#forecast');
           forecastEl.innerHTML = '<h4 class="mt-3">5-Day Forecast:</h4>';
   
-          // Create a div and a class of row.
+          // Create a div and a row class.
           forecastRowEl = document.createElement('div');
           forecastRowEl.className = '"row"';
   
           // Loop over all forecasts.
           for (var i = 0; i < data.list.length; i++) {
-            // Render forecasts around 9:00am
+            // Render forecasts around 9:00 am (also available every 3 hours at API).
             if (data.list[i].dt_txt.indexOf('9:00:00') !== -1) {
               // Create HTML elements in the bootstrap card.
               var colEl = document.createElement('div');
@@ -71,7 +71,7 @@ window.addEventListener('load', function () {
         });
     }
   
-    // fetch and display the UV index
+    // fetch and display the UV index.
     function getUVIndex(lat, lon) {
       fetch(
         `https://api.openweathermap.org/data/2.5/uvi?appid=91a02f731d160ea776c47556170a3960&lat=${lat}&lon=${lon}`
@@ -87,7 +87,7 @@ window.addEventListener('load', function () {
           buttonEl.classList.add('btn', 'btn-sm');
           buttonEl.innerHTML = data.value;
 
-      // Set different button colors according to uv indexes
+      // Set different button colors according to uv indexes.
           if (data.value <= 3) {
             buttonEl.classList.add('btn-success');
           }
@@ -108,21 +108,21 @@ window.addEventListener('load', function () {
         var existingEntries = JSON.parse(localStorage.getItem('history'));
         var newHistory = [existingEntries, term];
         localStorage.setItem('history', JSON.stringify(newHistory));
-        //  Save new history it localStorage
+        //  Save new history to localStorage.
       } else {
         historyItems.push(term);
         localStorage.setItem('history', JSON.stringify(historyItems));
       }
     };
   
-    //Function to get current weather, and return data to the page
+    //Function to get current weather and return data to the page.
     function searchWeather(city) {
       var weather = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=91a02f731d160ea776c47556170a3960&units=imperial`;
       fetch(weather)
         .then((res) => res.json())
         .then((data) => {
           console.log(data)
-          // Call history method
+          // Call saved history method.
           if (!savedHistory.includes(city)) {
             handleHistory(city);
           }
@@ -130,7 +130,7 @@ window.addEventListener('load', function () {
           todayEl = document.querySelector('#today');
           todayEl.textContent = ' ';
   
-          // Create html content for current weather
+          // Create, dynamically, html title content for current weather.
           var titleEl = document.createElement('h3');
           titleEl.classList.add('card-title');
           titleEl.textContent = `${
@@ -155,7 +155,7 @@ window.addEventListener('load', function () {
             `https://openweathermap.org/img/w/${data.weather[0].icon}.png`
               );
               console.log(data.weather[0].icon)
-          // Append all content created
+          // Append all content created.
           titleEl.appendChild(imgEl);
           cardBodyEl.appendChild(titleEl);
           cardBodyEl.appendChild(tempEl);
@@ -164,13 +164,13 @@ window.addEventListener('load', function () {
           cardEl.appendChild(cardBodyEl);
           todayEl.appendChild(cardEl);
   
-          // Call forecast & UV functions
+          // Call forecast & UV functions.
           getForecast(city);
           getUVIndex(data.coord.lat, data.coord.lon);
         });
     }
   
-    //  function to create a new row
+    //  function to create new row in search list.
     function makeRow(searchValue) {
       // Create a new `li` element and add classes/text to it
       var liEl = document.createElement('li');
@@ -179,7 +179,7 @@ window.addEventListener('load', function () {
       var text = searchValue;
       liEl.textContent = text;
   
-      // Select the history element and add an event to it
+      // Select the history element and add an event to it.
       liEl.addEventListener('click', (e) => {
         if (e.target.tagName === 'LI') {
           searchWeather(e.target.textContent);
@@ -193,7 +193,7 @@ window.addEventListener('load', function () {
       savedHistory.forEach((item) => makeRow(item));
     }
   
-    // function to get a search value.
+    // Function to get a search value.
     function getSearchVal() {
       var searchValue = document.querySelector('#search-value').value;
       if (searchValue) {
@@ -203,13 +203,13 @@ window.addEventListener('load', function () {
       }
     }
   
-    // Attach  getSearchVal function to the search button
+    // Attach  getSearchVal function to the search button.
     document
       .querySelector('#search-button')
       .addEventListener('click', getSearchVal);
   });
 
-  //create and enable Clear List button
+  //Create and enable Clear List button.
   $("#clearList").click(function(event) {
     event.preventDefault();
     $("#history").empty();
