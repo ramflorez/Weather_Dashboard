@@ -1,4 +1,4 @@
-Weather Dashboard
+# Weather Dashboard
 
 HTTML, CSS, JS, APIs
 
