@@ -1,3 +1,9 @@
+Weather Dashboard
+
+HTTML, CSS, JS, APIs
+
+ramflorez@yahoo.com
+
 In order to create the # Weather_Dashboard, I follow this flow.
 Initially, I created an html file with all the elements required like text areas, buttons and all necessary classes and Ids.
 I linked this DOM file with a preexisted framework in bootstrap for design, style and even font.
